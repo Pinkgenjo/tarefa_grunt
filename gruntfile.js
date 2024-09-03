@@ -1,32 +1,35 @@
 module.exports = function(grunt) {
-    // Configuração das tarefas
-    grunt.initConfig({
-      // Compilação do LESS
-      less: {
-        development: {
-          files: {
-            "dest/style.css": "src/style.less"
-          }
+  // Configuração das tarefas
+  grunt.initConfig({
+    // Compilação do LESS
+    less: {
+      development: {
+        options: {
+          sourceMap: true // Gera um mapa de origem para facilitar o debug
+        },
+        files: {
+          "dist/style.css": "src/style.less"
         }
-      },
-  
-      // Compressão de código JavaScript
-      uglify: {
+      }
+    },
+
+    // Compressão de código JavaScript
+    uglify: {
+      my_target: {
         options: {
           mangle: false
         },
-        my_target: {
-          files: {
-            'dest/output.min.js': ['src/input.js']
-          }
+        files: {
+          'dist/output.min.js': ['src/script.js']
         }
       }
-    });
-  
-    // Carrega os plugins
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-  
-    // Tarefa padrão
-    grunt.registerTask('default', ['less', 'uglify']);
-  };
+    }
+  });
+
+  // Carrega os plugins
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
+  // Tarefa padrão
+  grunt.registerTask('default', ['less', 'uglify']);
+};
